@@ -32,7 +32,7 @@ class Program
 
         Console.WriteLine($"The sum is: {sum}");
 
-        /ivision, and we get the decimal value that we expect.
+
         float average = ((float)sum) / numbers.Count;
         Console.WriteLine($"The average is: {average}");
         
