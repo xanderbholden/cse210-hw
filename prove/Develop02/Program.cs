@@ -30,7 +30,7 @@ class Program
         
         Journal userJournal = new Journal();
 
-        Console.WriteLine("Welcome to your journal!");
+        Console.WriteLine("Welcome to your handy dandy journal!");
         int journalChoice = 0;
 
         while (journalChoice != 5)
@@ -70,14 +70,14 @@ class Program
             else if (journalChoice == 3)
             {
                 Console.WriteLine("Load");
-                Console.Write("Please enter the file name: ");
+                Console.Write("Please enter your file name: ");
                     
                 string fileName = Console.ReadLine();
                 userJournal.LoadFromFile(fileName);
             }
             else if (journalChoice == 4)
             {
-                Console.Write("Please enter the file name: ");
+                Console.Write("Please enter your file name: ");
                 string fileName = Console.ReadLine();
                 
                 userJournal.SaveToFile(fileName);
@@ -86,12 +86,12 @@ class Program
             {}
             else
             {
-                Console.WriteLine("Sorry that isn't an available option.");
+                Console.WriteLine("Sorry this is recognized as an option.");
             }
 
         if (journalChoice == 5)
         {
-            Console.WriteLine("See ya next time!");
+            Console.WriteLine("Till next time!");
         }
         }
     
