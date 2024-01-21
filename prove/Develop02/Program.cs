@@ -86,7 +86,7 @@ class Program
             {}
             else
             {
-                Console.WriteLine("Sorry this is recognized as an option.");
+                Console.WriteLine("Sorry this is not recognized as an option.");
             }
 
         if (journalChoice == 5)
