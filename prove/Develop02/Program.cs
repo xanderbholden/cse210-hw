@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 
 class Program
 
@@ -11,67 +13,68 @@ class Program
         string time = DateTime.Now.ToString("hh:mm:ss tt");
         List<string> _entries = new List<string>();
 
-        //Initial menu options--------------------
+        //Menu options-----------------
         int? select = null;
         while (select != 6)
         {
             Console.WriteLine("");
-            Console.WriteLine("Please select one of the following:");
+            Console.WriteLine("Welcome. Please pick your poison:");
             Console.WriteLine("1. New Journal Entry");
             Console.WriteLine("2. Display Current Entries");
             Console.WriteLine("3. Load Previous Journal");
             Console.WriteLine("4. Save Current Journal");
             Console.WriteLine("5. Clear Current Jounal");
             Console.WriteLine("6. Quit");
-            Console.Write("What would you like to do?: ");
+            Console.Write("What do you choose?: ");
+            
             select = int.Parse(Console.ReadLine());
 
-            //Jounral entry--------------------
+            //Jounral entry----------------
             if (select == 1)
             {
                 Entry newEntry = new Entry();
-                PromptGen promptEntry = new PromptGen();
-                string prompt = promptEntry.GenPrompt();
+                PromptGen promptGenerator = new PromptGen();
                 string entry = newEntry.JournalEntry();
-                _entries.Add($"{date} @ {time} - {prompt} > {entry}");
-                select = null;
+                _entries.Add(entry);
+            
             }
 
-            //Display current journal--------------------
+            //Display current entry----------------
             else if (select == 2)
             {
-                foreach (string i in _entries)
+                foreach (string entry in _entries)
                 {
-                    Console.WriteLine(i);
+                    Console.WriteLine(entry);
                 }
             }
-
-            //Save the current journal to file--------------------
+             //Load previous entry--------------------
             else if (select == 3)
             {
-                SaveLoad load = new SaveLoad();
-                List<string> loadedList = load.LoadFile();
+                SaveFile saveFile = new SaveFile();
+                List<string> loadedEntries = saveFile.LoadEntries();
                 _entries.Clear();
-                foreach (string l in loadedList)
+                foreach (string entry in loadedEntries)
                 {
-                    _entries.Add(l);
+                    _entries.Add(entry);
                 }
                 Console.WriteLine("Journal loaded successfully");
-                select = null;
             }
-
-            //Load previous journal--------------------
+           //Save entry-------------------
             else if (select == 4)
             {
-                SaveLoad nameFile = new SaveLoad();
-                string name = nameFile.NameFile();
-                using (TextWriter tw = new StreamWriter(name))
-                {
-                    foreach (string s in _entries)
-                        tw.WriteLine(s);
+               string fileName = "xander.txt";
+               try
+               {
+                    using (TextWriter tw = new StreamWriter(fileName))
+                    {
+                     foreach (string s in _entries) tw.WriteLine(s);
+                    }
+                    Console.WriteLine($" Journal entry Successfully saved {fileName}");
                 }
-                Console.WriteLine($"Successfully saved {name}");
-                select = null;
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Journal entries saving Error: {ex.Message}");
+                }    
             }
 
             //Clear option to remove all current journal entries--------------------
@@ -95,19 +98,20 @@ class Program
                 }
             }
 
-            //End current session-------------------
+            //End current session------------
             else if (select == 6)
             {
-                Console.WriteLine("Program finished. Thank you!");
+                Console.WriteLine("Program finished. Thank you for the tea");
             }
 
-            //If input is under 1 or over 6--------------------
+            //If input is under 1 or over 6-----------------
             else
             {
-                Console.WriteLine("That is not the correct entry, Enter a number between 1-5.");
+                Console.WriteLine("Invalid, Please enter a number between 1-5.");
                 select = null;
             }
 
         }
     }
 }
+
