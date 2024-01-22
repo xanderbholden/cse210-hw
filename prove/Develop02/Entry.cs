@@ -1,13 +1,15 @@
-using System.Collections.Generic;
-
 public class Entry
 {
-    public string _date;
-    public string _promptText;
-    public string _entryText;
 
-    public void Display()
+    public string _userInput = "";
+
+    public string JournalEntry()
     {
-        Console.WriteLine($"Date: {_date} - Prompt: {_promptText} \n{_entryText}\n");
+        PromptGen generate = new PromptGen();
+        Console.Write(" > ");
+        _userInput = Console.ReadLine();
+        Console.WriteLine("Entry added");
+        return _userInput;
     }
+
 }

@@ -1,25 +1,35 @@
-using System.Reflection.Metadata.Ecma335;
+using System.Runtime.InteropServices;
 
-public class PromptGenerator
+public class PromptGen
 {
-    public List<string> _prompts = new List<string>();
 
-    public string GetRandomPrompt()
-    {
-        PromptGenerator initialPrompts = new PromptGenerator();
-
-        initialPrompts._prompts.Add("What was your biggest regret today?");
-        initialPrompts._prompts.Add("What was something you did today that got you closer to reaching a goal?");
-        
-        initialPrompts._prompts.Add("Who had the biggest influence on you today and why?");
-        initialPrompts._prompts.Add("What prayer has been in your heart today?");
-        initialPrompts._prompts.Add("What is a way the Lord has helped you today?");
-        initialPrompts._prompts.Add("What person have you helped today?");
-
-        Random randomGenerator = new Random();
-        int randomPromptIndex = randomGenerator.Next(1,initialPrompts._prompts.Count());
-        string randomPrompt = initialPrompts._prompts[randomPromptIndex];
-        
-        return randomPrompt;
+    //Default list options--------------------
+    public string GenPrompt()
+    {//Manual list
+        List<string> _prompts = new List<string>
+        { "Who was the most interesting person I interacted with today?",
+        "What was the best part of my day?",
+        "How did I see the hand of the Lord in my life today?",
+        "What was the strongest emotion I felt today?",
+        "If I had one thing I could do over today, what would it be?",
+        //My prompts begin here
+        "What did you do today?",
+        "Pick a random scripture. What does it mean to you?",
+        "If you're posterity saw this entry, what would you want them to know about you?",
+        "What new thing did you learn today?",
+        "What was your favorite song that you heard today?",
+        "Who was on your mind the most today?",
+        "Tough day huh? Tell me all about it.",
+        "How are you REALLY doing today?",
+        "What are you thinking about literally right now?",
+        "Why do you still write in your journal?",
+        "Whos have you helped today?",
+        "What prayer was in your heart today?" };
+        Random _rnd = new Random();
+        int _rngIndex = _rnd.Next(_prompts.Count);
+        string _random = _prompts[_rngIndex];
+        Console.Write(_random);
+        return _random;
     }
+
 }

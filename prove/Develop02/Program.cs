@@ -4,94 +4,107 @@ class Program
 {
     static void Main(string[] args)
     {
-        Journal journal = new Journal();
-        PromptGenerator promptGenerator = new PromptGenerator();
+        string date = DateTime.Now.ToString("MM/dd/yyyy");
+        string time = DateTime.Now.ToString("hh:mm:ss tt");
+        List<string> _entries = new List<string>();
 
-        DateTime the CurrentTime = DateTime.Now;
-        string currentDate = theCurrectTime.ToShortDateString();
-        
-        journal userJournal = new journal();
-
-        Console.WriteLine("Welcome to the Journal Program!");
-
-    }
-}
-        List<string> choiceOptions = new List<string>();
-
-        choiceOptions.Add("Blank");
-        choiceOptions.Add("Write");
-        choiceOptions.Add("Display");
-        choiceOptions.Add("Load");
-        choiceOptions.Add("Save");
-        choiceOptions.Add("Quit");
-
-        DateTime theCurrentTime = DateTime.Now;
-        string currentDate = theCurrentTime.ToShortDateString();
-        
-        Journal userJournal = new Journal();
-
-        Console.WriteLine("Welcome to your handy dandy journal!");
-        int journalChoice = 0;
-
-        while (journalChoice != 5)
+        //Initial menu options--------------------
+        int? select = null;
+        while (select != 6)
         {
-            Console.WriteLine("What would you like to do?");
+            Console.WriteLine("");
+            Console.WriteLine("Please select one of the following:");
+            Console.WriteLine("1. New Journal Entry");
+            Console.WriteLine("2. Display Current Entries");
+            Console.WriteLine("3. Load Previous Journal");
+            Console.WriteLine("4. Save Current Journal");
+            Console.WriteLine("5. Clear Current Jounal");
+            Console.WriteLine("6. Quit");
+            Console.Write("What would you like to do?: ");
+            select = int.Parse(Console.ReadLine());
 
-            for (int i = 1; i < choiceOptions.Count; i++)
-            {
-                Console.WriteLine($"{i}. {choiceOptions[i]}");
-            }
-
-            Console.Write(">>");
-
-            string userChoice = Console.ReadLine();
-            int userNumberChoice = int.Parse(userChoice);
-
-            journalChoice = userNumberChoice;
-
-            if (journalChoice == 1)
+            //Jounral entry--------------------
+            if (select == 1)
             {
                 Entry newEntry = new Entry();
-                newEntry._date = currentDate;
+                PromptGen promptEntry = new PromptGen();
+                string prompt = promptEntry.GenPrompt();
+                string entry = newEntry.JournalEntry();
+                _entries.Add($"{date} @ {time} - {prompt} > {entry}");
+                select = null;
+            }
 
-                PromptGenerator newPrompt = new PromptGenerator();
-                newEntry._promptText = newPrompt.GetRandomPrompt();
+            //Display current journal--------------------
+            else if (select == 2)
+            {
+                foreach (string i in _entries)
+                {
+                    Console.WriteLine(i);
+                }
+            }
 
-                Console.WriteLine(newEntry._promptText);
-                Console.Write(">>");
+            //Save the current journal to file--------------------
+            else if (select == 3)
+            {
+                SaveLoad load = new SaveLoad();
+                List<string> loadedList = load.LoadFile();
+                _entries.Clear();
+                foreach (string l in loadedList)
+                {
+                    _entries.Add(l);
+                }
+                Console.WriteLine("Journal loaded successfully");
+                select = null;
+            }
 
-                newEntry._entryText = Console.ReadLine();
-                userJournal.AddEntry(newEntry);
-            }
-            else if (journalChoice == 2)
+            //Load previous journal--------------------
+            else if (select == 4)
             {
-                userJournal.DisplayAll();
+                SaveLoad nameFile = new SaveLoad();
+                string name = nameFile.NameFile();
+                using (TextWriter tw = new StreamWriter(name))
+                {
+                    foreach (string s in _entries)
+                        tw.WriteLine(s);
+                }
+                Console.WriteLine($"Successfully saved {name}");
+                select = null;
             }
-            else if (journalChoice == 3)
+
+            //Clear option to remove all current journal entries--------------------
+            else if (select == 5)
             {
-                Console.WriteLine("Load");
-                Console.Write("Please enter your file name: ");
-                    
-                string fileName = Console.ReadLine();
-                userJournal.LoadFromFile(fileName);
+                string answer = "";
+                Console.WriteLine("Are you sure you want to delete the current journal?");
+                Console.Write("This cannot be undone (yes/no)! ");
+                answer = Console.ReadLine();
+
+                //Confirms to clear current entries or not-------------------
+                if (answer == "yes")
+                {
+                    _entries.Clear();
+                    Console.WriteLine("Jounral has been removed");
+                }
+
+                else
+                {
+                    Console.WriteLine("Journal has been logged");
+                }
             }
-            else if (journalChoice == 4)
+
+            //End current session-------------------
+            else if (select == 6)
             {
-                Console.Write("Please enter your file name: ");
-                string fileName = Console.ReadLine();
-                
-                userJournal.SaveToFile(fileName);
+                Console.WriteLine("Program finished. Thank you!");
             }
-            else if (journalChoice == 5)
-            {}
+
+            //If input is under 1 or over 6--------------------
             else
             {
-                Console.WriteLine("Sorry this is not recognized as an option.");
+                Console.WriteLine("That is not the correct entry, Enter a number between 1-5.");
+                select = null;
             }
 
-        if (journalChoice == 5)
-        {
-            Console.WriteLine("Till next time!");
         }
-        }
-    
+    }
+}
