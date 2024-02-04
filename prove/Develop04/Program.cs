@@ -1,3 +1,10 @@
+
+// Xander Holden 
+//Cse-210
+//Week 4
+//Mindfulness
+
+
 using System;
 
 class Program
