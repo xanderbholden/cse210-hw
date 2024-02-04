@@ -5,7 +5,7 @@ abstract class Activity
 {
     public virtual void Start()
     {
-        Console.Write("Get ready to begin...");
+        Console.Write("Get ready to start...");
         CountDown(3);
         Console.WriteLine();
     }
@@ -42,7 +42,7 @@ abstract class Activity
         int duration;
         while (true)
         {
-            Console.Write("How long would you like to run the program in seconds?: ");
+            Console.Write("How long would should we run the program in seconds?: ");
             if (int.TryParse(Console.ReadLine(), out duration) && duration > 0)
             {
                 return duration;

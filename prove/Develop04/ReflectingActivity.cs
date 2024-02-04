@@ -53,6 +53,7 @@ class ReflectionActivity : Activity
 
         Console.WriteLine("Well done!! :) You're awesome!!\n\n You have completed another {0} seconds of the Reflecting Activity", duration);
         Spinner(3);
+        Thread.Sleep(2000);
         Console.Clear();
     }
 }
