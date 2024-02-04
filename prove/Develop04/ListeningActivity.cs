@@ -52,8 +52,8 @@ class ListingActivity : Activity
         };
         string prompt = prompts[random.Next(prompts.Length)];
 
-        Console.WriteLine("Welcome to the Listing Activity");
-        Console.WriteLine("This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.\n");
+        Console.WriteLine("Ok great job, we are almost finished. Now on to the Listing Activity");
+        Console.WriteLine("This activity will help you reflect on the positive things in your life by having you list as many things as you can in a certain area.\n");
         Console.Write("How long, in seconds, would you like for your session? ");
         int timeLimit = GetDuration();
 
@@ -62,7 +62,7 @@ class ListingActivity : Activity
         base.Start();
 
         Console.WriteLine("List as many responses as you can to the following prompt:\n\n" + prompt + "\n");
-        Console.Write("You may begin in: ");
+        Console.Write("You may start in: ");
         CountDown(5);
 
         int x = 0;

@@ -6,7 +6,7 @@ class BreathingActivity : Activity
     {
         base.Start();
 
-        Console.WriteLine("Welcome to the Breathing Activity.\n");
+        Console.WriteLine("Lets begin with a Breathing Activity.\n");
         Console.Write("This section of the program will help you relax by walking you through a breathing exercise. Clear your mind and follow the prompts.\n\n How long, in seconds, would you like for your session? ");
         int duration = GetDuration();
         int total = duration;
