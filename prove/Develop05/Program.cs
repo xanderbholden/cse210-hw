@@ -92,7 +92,7 @@ class Program
                             {
                                 y.Record();
                             }
-                                Console.WriteLine(" Wich goal did you acomplish?");
+                                Console.WriteLine(" Wich goal did you complete?");
                                 Sgoal.RecordEvent();
                                 EternalGoal.RecordEvent();
                                 ChecklistGoal.RecordEvent();
