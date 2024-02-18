@@ -2,7 +2,7 @@ class Program
 {
     static void Main()
     {
-        // Creating Address, Customer, and Product instances
+        // Creating Address, Customer, and Product instances, online store created
         Address address1 = new Address("123 Main St", "Anytown", "CA", "USA");
         Customer customer1 = new Customer("John Doe", address1);
 
