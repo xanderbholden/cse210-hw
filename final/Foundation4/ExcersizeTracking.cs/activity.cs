@@ -2,8 +2,8 @@ using System;
 
 public class Activity
 {
-    private DateTime date;
-    private int minutes;
+    protected DateTime date;
+    protected int minutes;
 
     public Activity(DateTime date, int minutes)
     {

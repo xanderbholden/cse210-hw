@@ -6,6 +6,18 @@ public class Swimming : Activity
 
     public Swimming(DateTime date, int minutes, int laps) : base(date, minutes)
     {
+        if (laps < 0)
+        {
+            throw new ArgumentException("Number of laps must be non-negative.", nameof(laps));
+        }
+
+        if (minutes <= 0)
+        
+        {
+            throw new ArgumentException("Duration in minutes must be greater than zero.",nameof(minutes));
+        
+        }
+
         this.laps = laps;
     }
 
@@ -16,12 +28,14 @@ public class Swimming : Activity
 
     public override double GetSpeed()
     {
-        return GetDistance() / (minutes / 60.0);
+        double distance = GetDistance();
+        return distance > 0 ? distance / (minutes / 60.0) : 0;
     }
 
     public override double GetPace()
     {
-        return minutes / GetDistance();
+        double distance = GetDistance();
+        return distance > 0 ? minutes / distance : 0;
     }
 
     public override string GetSummary()

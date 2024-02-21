@@ -2,7 +2,7 @@ class Program
 {
     static void Main()
     {
-        // Creating 3-4 videos and adding comments
+        // Setting up 3-4 videos and adding comments
         Video video1 = new Video("Introduction to C#", "C# Guru", 300);
         video1.AddComment("User1", "Great tutorial!");
         video1.AddComment("User2", "I learned a lot!");
